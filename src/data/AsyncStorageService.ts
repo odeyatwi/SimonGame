@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {GameResult} from "./types/GameResult";
 
+const MAX_RESULT_STORE = 10;
 
 const AsyncStorageService = {
     gameResultKey: "game result key",
@@ -20,8 +21,8 @@ const AsyncStorageService = {
 
     async addGameResult(gameResult: GameResult): Promise<void> {
         const results = (await this.getGameResults()).sort(sortResult)
-        if (results.length == 0) {
-            await this.storeGameResult([gameResult])
+        if (results.length > MAX_RESULT_STORE) {
+            await this.storeGameResult([...results,gameResult])
         } else if (results[results.length - 1].score <= gameResult.score) {
             const newResult = [...results.slice(0, results.length - 1), gameResult];
             await this.storeGameResult(newResult);

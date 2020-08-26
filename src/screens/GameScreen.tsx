@@ -2,7 +2,10 @@ import React, {FunctionComponent, useCallback, useEffect, useRef} from "react";
 import {Animated, TouchableOpacity, View, Text, StyleSheet} from "react-native";
 import {observer} from "mobx-react";
 import {useGlobalStore} from "../store";
-import {Button, Colors} from "react-native-paper";
+import {Button, Colors, IconButton} from "react-native-paper";
+import {StackScreenProps} from "@react-navigation/stack";
+import {RootStackParamList} from "../navigation/StackComponent";
+import {RESULT_SCREEN} from "../navigation/ScreenNames";
 
 
 const colors = [
@@ -14,13 +17,19 @@ const colors = [
 
 const AnimatedButton = Animated.createAnimatedComponent(TouchableOpacity)
 
-const GameScreen: FunctionComponent = () => {
+type Props = StackScreenProps<RootStackParamList, 'GameScreen'>;
+
+
+const GameScreen: FunctionComponent<Props> = ({navigation}) => {
 
     const gameStore = useGlobalStore().game;
 
     useEffect(() => {
         if (gameStore.state == 'show') {
             animate(gameStore.gameSequence);
+        } else if (gameStore.state == 'mistake'){
+            goToResults(gameStore.gameSequence.length)();
+            gameStore.reset()
         }
     }, [gameStore.state, gameStore.gameSequence])
 
@@ -31,6 +40,10 @@ const GameScreen: FunctionComponent = () => {
     const pressButton = useCallback((number: number) => () => {
         gameStore.playStep(number);
     }, [gameStore.playStep])
+
+    const goToResults = useCallback((score?:number) => ()=> {
+        navigation.push(RESULT_SCREEN,{score})
+    },[])
 
     const buttons1State = useRef(new Animated.Value(0)).current;
     const buttons2State = useRef(new Animated.Value(0)).current;
@@ -85,8 +98,8 @@ const GameScreen: FunctionComponent = () => {
     const disableGameButtons = gameStore.state != 'play'
 
     return <View style={styles.container}>
-
-        <Text style={[styles.result,{opacity: gameStore.gameSequence.length < 1  ? 0 : 1}]}>Score: {gameStore.gameSequence.length - 1}</Text>
+        <IconButton icon={'trophy'} onPress={goToResults()} size={40} style={{alignSelf:'flex-end'}}/>
+        <Text style={[styles.result,{opacity: gameStore.gameSequence.length == 0  ? 0 : 1}]}>Score: {gameStore.gameSequence.length}</Text>
         <View style={styles.gameContainer}>
             <View style={styles.rowContainer}>
                 <AnimatedButton
@@ -127,7 +140,7 @@ const GameScreen: FunctionComponent = () => {
 const styles = StyleSheet.create({
     result: {
         fontSize: 23,
-        fontWeight:'900'
+        fontWeight: 'bold'
     },
     container: {
         flex: 1,

@@ -21,7 +21,7 @@ import appTheme from "./src/Theme";
 const App = () => {
     return (
         <>
-            <StatusBar barStyle="dark-content"/>
+            <StatusBar barStyle="dark-content" backgroundColor={'white'}/>
             <SafeAreaView style={{flex: 1}}>
                 <Provider theme={appTheme}>
                     <NavigationContainer>

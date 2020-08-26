@@ -60,6 +60,7 @@
 		33B1229624F6FFE20072FD03 /* simon_sound1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = simon_sound1.mp3; path = ../android/app/src/main/res/raw/simon_sound1.mp3; sourceTree = "<group>"; };
 		33B1229724F6FFE20072FD03 /* simon_sound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = simon_sound2.mp3; path = ../android/app/src/main/res/raw/simon_sound2.mp3; sourceTree = "<group>"; };
 		33B1229824F6FFE20072FD03 /* simon_sound4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = simon_sound4.mp3; path = ../android/app/src/main/res/raw/simon_sound4.mp3; sourceTree = "<group>"; };
+		33B1229D24F70F3E0072FD03 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		51415A6C81AE8DF0C6BB6D0E /* libPods-SimonGame-SimonGameTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SimonGame-SimonGameTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3DB413353241395C8A761E /* libPods-SimonGame.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SimonGame.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE69741A62CDAEED88F507C /* Pods-SimonGame-SimonGameTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimonGame-SimonGameTests.debug.xcconfig"; path = "Target Support Files/Pods-SimonGame-SimonGameTests/Pods-SimonGame-SimonGameTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 				33B1229724F6FFE20072FD03 /* simon_sound2.mp3 */,
 				33B1229524F6FFE20072FD03 /* simon_sound3.mp3 */,
 				33B1229824F6FFE20072FD03 /* simon_sound4.mp3 */,
+				33B1229D24F70F3E0072FD03 /* MaterialCommunityIcons.ttf */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -376,7 +378,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;

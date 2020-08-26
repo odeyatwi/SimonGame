@@ -61,6 +61,13 @@ class GameStore {
     playSound(index: number,delay: number){
         setTimeout(()=>GameStore.playSound(this.successSounds[index]),delay);
     }
+
+    @action
+    reset() {
+        this.gameSequence = [];
+        this.state = '';
+        this.step = 0;
+    }
 }
 
 export const game = new GameStore();

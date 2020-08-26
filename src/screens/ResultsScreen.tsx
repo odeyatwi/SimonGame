@@ -1,5 +1,11 @@
 import React, {FunctionComponent, useCallback, useEffect, useState} from "react";
-import {View, Text, FlatList, ListRenderItemInfo, StyleSheet} from "react-native";
+import {
+    View,
+    Text,
+    FlatList,
+    ListRenderItemInfo,
+    StyleSheet
+} from "react-native";
 import {observer} from "mobx-react";
 import {StackScreenProps} from "@react-navigation/stack";
 import {RootStackParamList} from "../navigation/StackComponent";
@@ -34,7 +40,7 @@ const ResultsScreen: FunctionComponent<Props> = (props) => {
     const saveScore = useCallback(() => {
         if (props.route.params.score) {
             resultStore.addResult({score: props.route.params.score!, name: userName});
-            setScoreModalVisible(false)
+            setScoreModalVisible(false);
         }
     }, [userName]);
 
@@ -48,25 +54,26 @@ const ResultsScreen: FunctionComponent<Props> = (props) => {
                 <Dialog.Title>Your score: {props.route.params.score}</Dialog.Title>
                 <Dialog.Content>
                     <TextInput
+                        mode={'outlined'}
                         value={userName}
                         onChangeText={setUserName}
                         label={'Your name'}
                     />
                 </Dialog.Content>
                 <Dialog.Actions>
-                    <Button onPress={saveScore}>SAVE</Button>
                     <Button onPress={hideModal}>CANCEL</Button>
+                    <Button onPress={saveScore}>SAVE</Button>
                 </Dialog.Actions>
             </Dialog>
         </Portal>;
 
     const renderItem = (item: ListRenderItemInfo<GameResult>) => {
         let trophyColor = 'rgba(0,0,0,0)'
-        if(item.index == 0){
+        if (item.index == 0) {
             trophyColor = '#AF9500'
-        } else if(item.index == 1){
+        } else if (item.index == 1) {
             trophyColor = '#B4B4B4'
-        } else if(item.index == 2){
+        } else if (item.index == 2) {
             trophyColor = '#AD8A56'
         }
         return <Card style={[styles.card]}>
@@ -80,18 +87,19 @@ const ResultsScreen: FunctionComponent<Props> = (props) => {
     };
 
     return <View style={styles.container}>
-        {renderSaveModal()}
+        {props.route.params.score && renderSaveModal()}
         <Title style={styles.title}><Icon name="trophy" size={30} color='#AF9500'/> Score List <Icon name="trophy"
-                                                                                                       size={30}
-                                                                                                       color='#AF9500'/></Title>
+                                                                                                     size={30}
+                                                                                                     color='#AF9500'/></Title>
         <FlatList
             style={styles.container}
             contentContainerStyle={[resultStore.results.length == 0 && styles.container]}
             data={resultStore.results}
             renderItem={renderItem}
             keyExtractor={(item, index) => item.score * index + item.name}
-            ListEmptyComponent={<View style={styles.emptyContainer}><Button onPress={openGameScreen}>GO
-                PLAY</Button></View>}
+            ListEmptyComponent={<View style={styles.emptyContainer}>
+                <Button onPress={openGameScreen}>GO PLAY</Button>
+            </View>}
         />
         <FAB visible={resultStore.results.length > 0} icon={'gamepad-variant'} onPress={openGameScreen}
              style={styles.fab}/>

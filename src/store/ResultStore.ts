@@ -4,7 +4,7 @@ import AsyncStorageService from "../data/AsyncStorageService";
 
 class ResultStore {
     @observable results: GameResult[];
-    @observable error?: string
+    @observable error?: string;
 
     constructor() {
         this.results = [];
@@ -12,12 +12,12 @@ class ResultStore {
 
     @action.bound
     setResults(results: GameResult[]) {
-        this.results = results
+        this.results = results;
     }
 
     @action.bound
     setError(error: string) {
-        this.error = error
+        this.error = error;
     }
 
     @action
@@ -26,7 +26,7 @@ class ResultStore {
             const results = await AsyncStorageService.getGameResults();
             this.setResults(results);
         } catch (e) {
-            this.setError(e.message)
+            this.setError(e.message);
         }
     }
 

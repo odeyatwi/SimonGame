@@ -6,7 +6,7 @@ class GameStore {
     @observable gameSequence: number[];
     @observable state: 'show' | 'play' | 'mistake' | '';
     private step: number;
-    private soundError = 'error.mp3'
+    private soundError = 'error.mp3';
     public successSounds = ['simon_sound1.mp3', 'simon_sound2.mp3', 'simon_sound3.mp3', 'simon_sound4.mp3'];
 
 
@@ -25,7 +25,6 @@ class GameStore {
 
     @action
     playStep(play: number) {
-        console.log('play step', this.step, play, this.gameSequence[this.step])
         if (this.gameSequence[this.step] != play) {
             GameStore.playSound(this.soundError);
             this.state = 'mistake';
@@ -41,18 +40,14 @@ class GameStore {
     @action
     start() {
         this.step = 0;
-        this.state = 'play'
-
+        this.state = 'play';
     }
 
     private static playSound(file: string) {
-        console.log('playSound',file)
         const player = new Player(file)
-        console.log(player)
             player.prepare((error) => {
-            console.log(error)
                 if (!error) {
-                    player.play()
+                    player.play();
                 }
             })
     }

@@ -98,37 +98,29 @@ const GameScreen: FunctionComponent<Props> = ({navigation}) => {
     const disableGameButtons = gameStore.state != 'play'
 
     return <View style={styles.container}>
+        <View style={{width:'100%'}}>
         <IconButton icon={'trophy'} onPress={goToResults()} size={40} style={{alignSelf:'flex-end'}}/>
         <Text style={[styles.result,{opacity: gameStore.gameSequence.length == 0  ? 0 : 1}]}>Score: {gameStore.gameSequence.length}</Text>
+        </View>
         <View style={styles.gameContainer}>
+            <AnimatedButton
+                style={[styles.gameButton,{ backgroundColor: buttons1Color,alignSelf:'center'}]}
+                onPress={pressButton(0)}
+                disabled={disableGameButtons}/>
             <View style={styles.rowContainer}>
-                <AnimatedButton
-                    style={[styles.gameButton,{ backgroundColor: buttons1Color}]}
-                    onPress={pressButton(0)}
-                    disabled={disableGameButtons}>
-                        <Text style={{color: 'white', fontSize: 20, alignSelf: 'center'}}>0</Text>
-                </AnimatedButton>
                 <AnimatedButton
                     style={[styles.gameButton,{ backgroundColor: buttons2Color}]}
                     onPress={pressButton(1)}
-                    disabled={disableGameButtons}>
-                        <Text style={{color: 'white', fontSize: 20, alignSelf: 'center'}}>1</Text>
-                </AnimatedButton>
-            </View>
-            <View style={[styles.rowContainer,{marginTop: '10%'}]}>
+                    disabled={disableGameButtons}/>
                 <AnimatedButton
                     style={[styles.gameButton,{ backgroundColor: buttons3Color}]}
                     onPress={pressButton(2)}
-                    disabled={disableGameButtons}>
-                        <Text style={{color: 'white', fontSize: 20, alignSelf: 'center'}}>2</Text>
-                </AnimatedButton>
-                <AnimatedButton
-                    style={[styles.gameButton,{ backgroundColor: buttons4Color}]}
-                    onPress={pressButton(3)}
-                    disabled={disableGameButtons}>
-                        <Text style={{color: 'white', fontSize: 20, alignSelf: 'center'}}>3</Text>
-                </AnimatedButton>
+                    disabled={disableGameButtons}/>
             </View>
+                <AnimatedButton
+                    style={[styles.gameButton,{ backgroundColor: buttons4Color,alignSelf:'center'}]}
+                    onPress={pressButton(3)}
+                    disabled={disableGameButtons}/>
 
         </View>
         <Button mode={'contained'} style={styles.playButton} contentStyle={{height:'100%'}} onPress={startGame} disabled={gameStore.state != ''} uppercase={false} theme={{roundness:20}}>
@@ -140,31 +132,36 @@ const GameScreen: FunctionComponent<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
     result: {
         fontSize: 23,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop:'3%',
+        alignSelf :'center'
     },
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent:'space-around'
+        justifyContent:'space-between'
     },
     gameContainer:{
-        width: '80%'
+        width: '85%'
     },
     rowContainer:{
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginVertical:'5%'
     },
     gameButton:{
-        width: '40%',
+        width: '30%',
         height: undefined,
-        aspectRatio: 1
+        aspectRatio: 1,
+        borderRadius: 100
     },
     playButton:{
         width: '80%',
         height:'8%',
-        justifyContent:'center'
+        justifyContent:'center',
+        marginBottom:'10%'
     }
-})
+});
 
-export default observer(GameScreen)
+export default observer(GameScreen);

@@ -19,7 +19,7 @@ const AsyncStorageService = {
         try {
             await AsyncStorage.setItem(this.gameResultKey, JSON.stringify(results));
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     },
 
@@ -37,9 +37,9 @@ const AsyncStorageService = {
 
 function sortResult(first: GameResult, second: GameResult): number {
     if (first.score > second.score) {
-        return -1
+        return -1;
     }
-    return 1
+    return 1;
 }
 
 export default AsyncStorageService;

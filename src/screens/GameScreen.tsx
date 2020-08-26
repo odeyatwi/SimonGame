@@ -77,6 +77,7 @@ const GameScreen: FunctionComponent = () => {
                 })
             ]).flat()
         Animated.sequence(items).start(() => gameStore.start());
+        sequence.map((i, index)=>gameStore.playSound(i,500 + 600 * index))
     }
 
     console.log(gameStore.state, gameStore.gameSequence)
@@ -101,7 +102,7 @@ const GameScreen: FunctionComponent = () => {
                         <Text style={{color: 'white', fontSize: 20, alignSelf: 'center'}}>1</Text>
                 </AnimatedButton>
             </View>
-            <View style={styles.rowContainer}>
+            <View style={[styles.rowContainer,{marginTop: '10%'}]}>
                 <AnimatedButton
                     style={[styles.gameButton,{ backgroundColor: buttons3Color}]}
                     onPress={pressButton(2)}
